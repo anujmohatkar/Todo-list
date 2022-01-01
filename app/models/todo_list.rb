@@ -34,4 +34,14 @@ class TodoList < ApplicationRecord
       'primary'
     end
   end
+
+  def total_expenditure
+   @total_expenditure = todo_items.sum(:contri )
+  end
+
+  def individual_cost
+     return 0 if total_items == 0
+     ( total_expenditure.to_f / total_items).round(1)
+  end
+
 end

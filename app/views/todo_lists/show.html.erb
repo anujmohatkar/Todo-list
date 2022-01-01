@@ -12,7 +12,7 @@
             <b><%= @todo_list.title %></b>
              <span class="badge bg-<%= @todo_list.badge_color %>"><%= @todo_list.status %></span>
         </h5>
-        <p class='text-secondary'><small><%= @todo_list.percent_complete %>% Complete (<%= @todo_list.completed_items %>/<%= @todo_list.total_items%> Todo Items)</small></p>
+        <p class='text-secondary'><small>Total Expenditure: Rs. <%= @todo_list.total_expenditure %> (<%= @todo_list.individual_cost %>)</small></p>
   </div>
   <div>
      <%= link_to 'Edit', edit_todo_list_path(@todo_list), class:'btn btn-warning' %>
@@ -36,6 +36,7 @@
    <div class="input-group mb-4">
      <%= f.text_field :description, class: 'form-control', placeholder:'Add a todo item' %>
      <div class="input-group-append">
+      <%= f.number_field :contri, class: 'form-control', placeholder:'money' %>
       <%= f.submit "Add", class:'btn btn-primary input-group-btn' %>
     </div>
    </div>
@@ -48,7 +49,7 @@
      <li class='list-group-item bg-light'>
       <div class="d-flex justify-content-between">
          <span class='text-muted'>
-           <em><%= todo_item.description  %></em>
+           <em><%= todo_item.description %>(<%= todo_item.contri %>)</em>
          </span>
          <%= link_to '#', class:'btn btn-dark', data: { reflex:'click->TodoItem#mark_incomplete', id: todo_item.id }  do %>
          <i class='fas fa-undo-alt'></i>
@@ -59,7 +60,7 @@
      <li class='list-group-item'>
       <div class="d-flex justify-content-between">
          <span>
-           <%= todo_item.description  %>
+           <%= todo_item.description %>(<%= todo_item.contri %>)(<%= @raw = (@todo_list.individual_cost - todo_item.contri).round (1) %>)
          </span>
          <%= link_to '#', class:'btn btn-info',  data: { reflex:'click->TodoItem#mark_complete', id: todo_item.id }  do %>
          <i class='fas fa-check'></i>
