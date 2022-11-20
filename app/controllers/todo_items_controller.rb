@@ -59,6 +59,6 @@ class TodoItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def todo_item_params
-      params.require(:todo_item).permit(:description, :completed, :completed_at, :todo_list_id, :contri)
+      params.require(:todo_item).permit(:description, :completed, :completed_at, :todo_list_id, :contri, :ps)
     end
 end
